@@ -19,6 +19,7 @@ namespace Drive
             width = _width;
             height = _height;
             speed = _speed;
+            //image = _image;
             colour = _colour;
         }
 

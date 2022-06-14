@@ -22,7 +22,10 @@ namespace Drive
 
         // Brushes
         SolidBrush playerBrush = new SolidBrush(Color.Red);
-        
+
+
+        Image playerImage = Properties.Resources.r34skylinejif_1rescaled;
+
 
         public GameScreen()
         {
@@ -35,10 +38,10 @@ namespace Drive
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
             canMove = true;
-
+            //int playerImage = Properties.Resources.r34skylinejif_1rescaled;
             // setup starting player values and create player object
-            int playerWidth = 80;
-            int playerHeight = 20;
+            int playerWidth = 50;
+            int playerHeight = 80;
             int playerX = 300;//((this.Width / 2) - (playerWidth / 2));
             int playerY = 550;//(this.Height - playerHeight) - 60;
             int playerSpeed = 8;
@@ -123,6 +126,9 @@ namespace Drive
         {
             playerBrush.Color = player.colour;
             e.Graphics.FillRectangle(playerBrush, player.x, player.y, player.width, player.height);
+            
+            
+            //e.Graphics.DrawImage(playerImage, player);
         }
 
     }
