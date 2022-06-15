@@ -58,6 +58,7 @@
     <Compile Include="GameScreen.Designer.cs">
       <DependentUpon>GameScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="obsticle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\r34skylinejif.1rescaled.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carTransparent.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

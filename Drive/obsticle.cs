@@ -7,12 +7,12 @@ using System.Drawing;
 
 namespace Drive
 {
-    internal class Player
+    internal class obsticle
     {
         public int x, y, width, height, speed;
         public Color colour;
 
-        public Player(int _x, int _y, int _width, int _height, int _speed, Color _colour)
+        public obsticle(int _x, int _y, int _width, int _height, int _speed, Color _colour)
         {
             x = _x;
             y = _y;
@@ -21,25 +21,13 @@ namespace Drive
             speed = _speed;
             //image = _image;
             colour = _colour;
+
+
         }
 
-        public void Move(string direction)
+        public void Move()
         {
-            if (direction == "left")
-            {
-                //x -= speed;
-                x = x - 180;
-                
-                
-                
-            }
-            if (direction == "right")
-            {
-                //x += speed;
-                x = x + 180;
-               
-            }
+            y -= speed;
         }
-
     }
 }

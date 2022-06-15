@@ -47,7 +47,6 @@
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // GameScreen
             // 
@@ -58,7 +57,7 @@
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.Name = "GameScreen";
-            this.Size = new System.Drawing.Size(603, 449);
+            this.Size = new System.Drawing.Size(601, 447);
             this.Load += new System.EventHandler(this.GameScreen_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameScreen_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
