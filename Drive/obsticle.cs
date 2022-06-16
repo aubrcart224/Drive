@@ -29,5 +29,18 @@ namespace Drive
         {
             y -= speed;
         }
+
+        public bool BottomCollision(GameScreen GS)
+        {
+            Boolean didCollide = false;
+
+            if (y >= GS.Height)
+            {
+                //MenuScreen.soundList[5].Play(); //Plays a sad sound (JUAN)
+                didCollide = true;
+            }
+
+            return didCollide;
+        }
     }
 }

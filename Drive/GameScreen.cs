@@ -19,6 +19,9 @@ namespace Drive
 
         Player player;
         obsticle obsticle;
+        //List<Rectangle> obsicles = new List<Rectangle>();
+        
+        
 
 
         // Brushes
@@ -27,6 +30,8 @@ namespace Drive
 
 
         Image playerImage = Properties.Resources.carTransparent;
+
+        int score;
 
 
         public GameScreen()
@@ -56,6 +61,10 @@ namespace Drive
             int obsticalY = 150;
             int obsticalSpeed = -1;
             obsticle = new obsticle(obsticalX, obsticalY, obsticalWidth, obsticalHeight, obsticalSpeed, Color.Black);
+
+
+            //score 
+            score = 0; 
 
             gameTimer.Enabled = true;
 
@@ -112,7 +121,7 @@ namespace Drive
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            label1.Text = "working";
+            scoreLable.Text = $"{score}";
 
             if (leftArrowDown && player.x > 100 && canMove == true)
             {
@@ -127,34 +136,29 @@ namespace Drive
 
             obsticle.Move();
 
+            //check if it hits the bottom if yes get rid of it 
+            if (obsticle.BottomCollision(this))
+            {
+                //remove enemy 
+
+                obsticle.y = 0;
+
+
+            }
+
 
             //every time the obsticle moves it increases in size 
 
-            if (obsticle.y > 1 && obsticle.width < 50)
+            if (obsticle.y % 50 == 0 )
             {
                 //obsticle.width = obsticle.width + 2;
                 //obsticle.height = obsticle.height + 2;
                 //obsticle.y += -1;
                 //obsticle.x += -1;
-
-
             }
 
-            if (obsticle.y %obsticle.y == 0)
-            {
-                obsticle.width = obsticle.width + 2;
-                obsticle.height = obsticle.height + 2;
-                obsticle.y += -1;
-                obsticle.x += -1;
-            }
 
-            if (obsticle.y > 200)
-            {
-                //make the width and height greater by 4
-                //shift x value left 2
-                //shift y value up 2
-            }
-
+            score++;
             Refresh();
         }
 
@@ -162,9 +166,6 @@ namespace Drive
         {
             playerBrush.Color = player.colour;
             obsticleBrush.Color = obsticle.colour;
-           // e.Graphics.FillRectangle(playerBrush, player.x, player.y, player.width, player.height);
-
-
             e.Graphics.DrawImage(playerImage, player.x, player.y, player.width, player.height);
             e.Graphics.FillRectangle(obsticleBrush, obsticle.x, obsticle.y, obsticle.width, obsticle.height);
         }

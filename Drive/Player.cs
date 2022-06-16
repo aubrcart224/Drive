@@ -27,19 +27,31 @@ namespace Drive
         {
             if (direction == "left")
             {
-                //x -= speed;
                 x = x - 180;
-                
-                
-                
             }
+
             if (direction == "right")
             {
-                //x += speed;
                 x = x + 180;
-               
             }
         }
+
+        public bool ObjectCollision(obsticle o)
+        {
+            Rectangle obsticleRec = new Rectangle(o.x, o.y, o.width, o.height);
+            Rectangle playerRec = new Rectangle(x, y, width, height);
+
+            if (obsticleRec.IntersectsWith(playerRec))
+            {
+                //run game over method 
+                //timer stops 
+            }
+
+
+            return obsticleRec.IntersectsWith(playerRec);
+        }
+
+
 
     }
 }

@@ -20,7 +20,7 @@ namespace Drive
         private void Form1_Load(object sender, EventArgs e)
         {
             // Start the program centred on the Menu Screen
-            GameScreen ms = new GameScreen();
+            MenuScreen ms = new MenuScreen();
             this.Controls.Add(ms);
 
             ms.Location = new Point((this.Width - ms.Width) / 2, (this.Height - ms.Height) / 2);
