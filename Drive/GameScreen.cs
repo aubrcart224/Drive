@@ -32,7 +32,7 @@ namespace Drive
         Image playerImage = Properties.Resources.carTransparent;
 
         int score;
-
+        int obsticleTimer;
 
         public GameScreen()
         {
@@ -64,7 +64,9 @@ namespace Drive
 
 
             //score 
-            score = 0; 
+            score = 0;
+            //
+            obsticleTimer = 0;
 
             gameTimer.Enabled = true;
 
@@ -149,15 +151,24 @@ namespace Drive
 
             //every time the obsticle moves it increases in size 
 
-            if (obsticle.y % 50 == 0 )
+            if (obsticleTimer % 4 == 0 && obsticle.y < 300)
             {
-                //obsticle.width = obsticle.width + 2;
-                //obsticle.height = obsticle.height + 2;
-                //obsticle.y += -1;
-                //obsticle.x += -1;
+                obsticle.width = obsticle.width + 2;
+                obsticle.height = obsticle.height + 2;
+                obsticle.y += -1;
+                obsticle.x += -1;
+
+            }
+            if (obsticle.y == 300)
+            {
+                obsticle.speed = obsticle.speed * 2;
             }
 
 
+
+
+
+            obsticleTimer++;
             score++;
             Refresh();
         }
@@ -170,5 +181,36 @@ namespace Drive
             e.Graphics.FillRectangle(obsticleBrush, obsticle.x, obsticle.y, obsticle.width, obsticle.height);
         }
 
+        //highscores 
+        public void loadDB()
+        {
+            XmlReader reader = XmlReader.Create("Resources/HighScore.xml", null);
+
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Text)
+                {
+                    string id = reader.ReadString();
+
+                    reader.ReadToNextSibling("firstName");
+                    string firstName = reader.ReadString();
+
+                    reader.ReadToNextSibling("lastName");
+                    string lastName = reader.ReadString();
+
+                    reader.ReadToNextSibling("date");
+                    string date = reader.ReadString();
+
+                    reader.ReadToNextSibling("salary");
+                    string salary = reader.ReadString();
+
+                    Employee employee = new Employee(id, firstName, lastName, date, salary);
+                    employeeDB.Add(employee);
+
+                }
+            }
+
+            reader.Close();
+        }
     }
 }

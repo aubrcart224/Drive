@@ -124,5 +124,8 @@
   <ItemGroup>
     <None Include="Resources\carTransparent.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="HighScore.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
