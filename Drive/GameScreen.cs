@@ -17,6 +17,7 @@ namespace Drive
         Boolean leftArrowDown, rightArrowDown;
         Boolean canMove;
 
+        //objects 
         Player player;
         obsticle obsticle;
         obsticle obsticle2;
@@ -24,10 +25,13 @@ namespace Drive
 
         
         
-            List<Rectangle> obsicles = new List<Rectangle>();
+        List<obsticle> obsicles = new List<obsticle>();
         
         List<int> highscores = new List<int>();
-        
+
+        //random gen 
+        Random randGen = new Random();
+        public static int position;
 
 
         // Brushes
@@ -38,7 +42,7 @@ namespace Drive
         Image playerImage = Properties.Resources.carTransparent;
         Image enemyImage = Properties.Resources.enemyImage;
 
-        int score;
+        public static int score;
         // int highscore; 
         int obsticleTimer;
 
@@ -70,17 +74,20 @@ namespace Drive
             int obsticalX2 = 275;
             int obsticalX3 = 315;
             int obsticalY = 130;
+            int obsticalY2 = 130;
+            int obsticalY3 = 130;
             
   
             obsticle = new obsticle(obsticalX, obsticalY, obsticalWidth, obsticalHeight, obsticalSpeed, Color.Black);
-            obsticle2 = new obsticle(obsticalX2, obsticalY, obsticalWidth, obsticalHeight, obsticalSpeed, Color.Black);
-            obsticle3 = new obsticle(obsticalX3, obsticalY, obsticalWidth, obsticalHeight, obsticalSpeed, Color.Black);
+            obsticle2 = new obsticle(obsticalX2, obsticalY2, obsticalWidth, obsticalHeight, obsticalSpeed, Color.Black);
+            obsticle3 = new obsticle(obsticalX3, obsticalY3, obsticalWidth, obsticalHeight, obsticalSpeed, Color.Black);
 
 
 
             //list things 
             //obsicles.Add(obsticle);
             //obsicles.Add(obsticle2);
+            //obsicles.Add(obsticle3);
 
             //score 
             score = 0;
@@ -141,6 +148,8 @@ namespace Drive
         
 
         private void gameTimer_Tick(object sender, EventArgs e)
+       
+        
         {
             scoreLable.Text = $"{score}";
 
@@ -155,66 +164,84 @@ namespace Drive
                 canMove = false;
             }
 
-            obsticle.Move();
-            obsticle2.Move();
-            //obsticle3.Move();
+            //choose a random position to spawn a car if a car is not within a certain radius to each other 
 
-            //check if it hits the bottom if yes get rid of it 
-            if (obsticle.BottomCollision(this))
+            if (obsticleTimer % 100 == 0)
             {
-                //remove enemy 
-                
-                
-
-
+                position = randGen.Next(0, 2);
+                if (position == 0)
+                {
+                    obsicles.Add(obsticle);
+                }
+                if (position == 1)
+                {
+                    obsicles.Add(obsticle2);
+                }
+                if (position == 2)
+                {
+                    obsicles.Add(obsticle3);
+                }
             }
 
 
-            //every time the obsticle moves it increases in size 
+            obsticle.Move();
+            obsticle2.Move();
+            obsticle3.Move();
+
+            //check if it hits the bottom if yes get rid of it 
+              //obsicles.Remove(obsticle(i));
+            foreach (obsticle o in obsicles)
+            {
+                    if (obsticle.BottomCollision(this))
+                    {
+
+                        obsicles.Remove(o);
+
+                   break;
+                }
+            }
+
+
+
+            
+
+
+            //every time the obsticle moves it increases in size changes position and chnages its speed to keep it consistant as the pixel count increases
             //obsticle one 
-            if (obsticleTimer % 4 == 0 && obsticle.y < 300)
+            if (obsticleTimer % 4 == 0 )
             {
                 obsticle.width = obsticle.width + 2;
                 obsticle.height = obsticle.height + 2;
-                obsticle.y += -1;
+                obsticle.y += 3;
                 obsticle.x += -1;
 
             }
-          
 
             //obsticle two 
-            if (obsticleTimer % 4 == 0 && obsticle2.y < 240)
+            if (obsticleTimer % 4 == 0 )
             {
-               
-                obsticle2.width = obsticle.width + 2;
-                obsticle2.height = obsticle.height + 2;
-                obsticle2.y += -1;
+                obsticle2.width = obsticle2.width + 2;
+                obsticle2.height = obsticle2.height + 2;
+                obsticle2.y += 3;
                 obsticle2.x += -3;
 
-
-            }
-           
-            if (obsticle2.y > 240 && obsticleTimer % 1 == 0)
+            } 
+            if (obsticle2.y > 200 && obsticleTimer % 1 == 0)
             {
-                //obsticle2.speed += obsticle2.speed ;
-                obsticle2.x += -2;
+                obsticle2.x += -1;
             }
 
             //obsticle 3
             if (obsticleTimer % 4 == 0)
             {
-
-                obsticle3.width = obsticle.width + 2;
-                obsticle3.height = obsticle.height + 2;
+                obsticle3.width = obsticle3.width + 2;
+                obsticle3.height = obsticle3.height + 2;
                 obsticle3.y += 3;
                 obsticle3.x += 1;
-
-
             }
            
             if (obsticle3.y > 200 && obsticleTimer % 1 == 0)
             {
-                
                 obsticle3.x += 1;
             }
 
@@ -231,10 +258,16 @@ namespace Drive
             
             //create enenmys and add thier respctive images 
             e.Graphics.DrawImage(playerImage, player.x, player.y, player.width, player.height);
-            e.Graphics.DrawImage(enemyImage, obsticle.x, obsticle.y, obsticle.width, obsticle.height);
-            e.Graphics.DrawImage(enemyImage, obsticle2.x, obsticle2.y, obsticle2.width, obsticle2.height);
-            e.Graphics.DrawImage(enemyImage, obsticle3.x, obsticle3.y, obsticle3.width, obsticle3.height);
-           
+
+
+            foreach (obsticle o in obsicles)
+            {
+                e.Graphics.DrawImage(enemyImage, o.x, o.y, o.width, o.height);
+            }
+            //e.Graphics.DrawImage(enemyImage, obsticle.x, obsticle.y, obsticle.width, obsticle.height);
+            //e.Graphics.DrawImage(enemyImage, obsticle2.x, obsticle2.y, obsticle2.width, obsticle2.height);
+            //e.Graphics.DrawImage(enemyImage, obsticle3.x, obsticle3.y, obsticle3.width, obsticle3.height);
+
 
         }
 

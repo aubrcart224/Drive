@@ -43,8 +43,7 @@ namespace Drive
 
             if (obsticleRec.IntersectsWith(playerRec))
             {
-                //run game over method 
-                //timer stops 
+                GameScreen.score = 0; 
             }
 
 
