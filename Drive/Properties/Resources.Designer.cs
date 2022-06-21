@@ -101,6 +101,16 @@ namespace Drive.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] menuScreenDrive_1 {
+            get {
+                object obj = ResourceManager.GetObject("menuScreenDrive_1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap r34skylinejif_1 {

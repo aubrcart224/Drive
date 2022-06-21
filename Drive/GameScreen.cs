@@ -22,10 +22,11 @@ namespace Drive
         obsticle obsticle2;
         obsticle obsticle3;
 
-
-        List<Rectangle> obsicles = new List<Rectangle>();
         
         
+            List<Rectangle> obsicles = new List<Rectangle>();
+        
+        List<int> highscores = new List<int>();
         
 
 
@@ -38,7 +39,7 @@ namespace Drive
         Image enemyImage = Properties.Resources.enemyImage;
 
         int score;
-        string highscore;
+        // int highscore; 
         int obsticleTimer;
 
         public GameScreen()
@@ -162,7 +163,7 @@ namespace Drive
             if (obsticle.BottomCollision(this))
             {
                 //remove enemy 
-
+                
                 
 
 
@@ -179,28 +180,43 @@ namespace Drive
                 obsticle.x += -1;
 
             }
-            if (obsticle.y == 200)
-            {
-                obsticle.speed = obsticle.speed * 2;
-            }
+          
 
             //obsticle two 
-            if (obsticleTimer % 4 == 0 )
+            if (obsticleTimer % 4 == 0 && obsticle2.y < 240)
             {
-                //&& obsticle.y < 300
+               
                 obsticle2.width = obsticle.width + 2;
                 obsticle2.height = obsticle.height + 2;
                 obsticle2.y += -1;
                 obsticle2.x += -3;
 
+
             }
-            if (obsticle2.y == 200)
+           
+            if (obsticle2.y > 240 && obsticleTimer % 1 == 0)
             {
-                //obsticle2.speed = obsticle.speed * 2;
+                //obsticle2.speed += obsticle2.speed ;
+                obsticle2.x += -2;
             }
 
+            //obsticle 3
+            if (obsticleTimer % 4 == 0)
+            {
+
+                obsticle3.width = obsticle.width + 2;
+                obsticle3.height = obsticle.height + 2;
+                obsticle3.y += 3;
+                obsticle3.x += 1;
 
 
+            }
+           
+            if (obsticle3.y > 200 && obsticleTimer % 1 == 0)
+            {
+                
+                obsticle3.x += 1;
+            }
 
 
             obsticleTimer++;
@@ -212,6 +228,8 @@ namespace Drive
         {
             playerBrush.Color = player.colour;
             obsticleBrush.Color = obsticle.colour;
+            
+            //create enenmys and add thier respctive images 
             e.Graphics.DrawImage(playerImage, player.x, player.y, player.width, player.height);
             e.Graphics.DrawImage(enemyImage, obsticle.x, obsticle.y, obsticle.width, obsticle.height);
             e.Graphics.DrawImage(enemyImage, obsticle2.x, obsticle2.y, obsticle2.width, obsticle2.height);
@@ -221,50 +239,43 @@ namespace Drive
         }
 
         //highscores 
-        //public void loadDB()
-        //{
-        //    XmlReader reader = XmlReader.Create("Resources/HighScore.xml", null);
+        public void loadDB()
+        {
+            XmlReader reader = XmlReader.Create("Resources/HighScore.xml", null);
 
-        //    while (reader.Read())
-        //    {
-        //        if (reader.NodeType == XmlNodeType.Text)
-        //        {
-        //            string id = reader.ReadString();
 
-        //            reader.ReadToNextSibling("firstName");
-        //            string firstName = reader.ReadString();
 
-        //            reader.ReadToNextSibling("lastName");
-        //            string lastName = reader.ReadString();
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Text)
+                {
 
-        //            reader.ReadToNextSibling("date");
-        //            string date = reader.ReadString();
+                    string name = reader.ReadString();
 
-        //            reader.ReadToNextSibling("salary");
-        //            string salary = reader.ReadString();
+                    reader.ReadToNextSibling("HighScore");
+                    string highscore = reader.ReadString();
 
-        //            Employee employee = new Employee(id, firstName, lastName, date, salary);
-        //            employeeDB.Add(employee);
+                    //highScoreLabel.Text = $"{highscore}";
+                    //nameLabel.Text = $"{name}:";
 
-        //        }
-        //    }
-
-        //    reader.Close();
-        //}
+                }
+                reader.Close();
+            }
+        }
 
         //public void saveDB()
         //{
 
-        //    // send saved values to the xml file 
+        //    send saved values to the xml file
 
-        //    XmlWriter writer = XmlWriter.Create("Resources/HighScore.xml", null);
+        //   XmlWriter writer = XmlWriter.Create("Resources/HighScore.xml", null);
 
-        //    writer.WriteStartElement("Employees");
+        //    writer.WriteStartElement("HighScore");
 
-        //    foreach (highscore emp in employeeDB)
+        //    foreach (highscore Hs in highscores)
         //    {
         //        writer.WriteStartElement("Employee");
-        //        writer.WriteElementString("highscore", )
+        //        writer.WriteElementString("highscore", );
 
 
         //        writer.WriteElementString("id", emp.id);
@@ -273,12 +284,16 @@ namespace Drive
         //        writer.WriteElementString("date", emp.date);
         //        writer.WriteElementString("salary", emp.salary);
 
+        //        writer.WriteElementString(highscores));
+
+        //        writer.WriteElementString("HighScore", Convert.ToString(score));
+
         //        writer.WriteEndElement();
 
         //    }
 
         //    writer.WriteEndElement();
         //    writer.Close();
-        //}
+        }
     }
-}
+
