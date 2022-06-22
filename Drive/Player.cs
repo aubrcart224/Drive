@@ -36,19 +36,21 @@ namespace Drive
             }
         }
 
-        public bool ObjectCollision(obsticle o)
+        public bool Collision(obsticle o)
         {
             Rectangle obsticleRec = new Rectangle(o.x, o.y, o.width, o.height);
             Rectangle playerRec = new Rectangle(x, y, width, height);
 
             if (obsticleRec.IntersectsWith(playerRec))
             {
-                GameScreen.score = 0; 
+                GameScreen.score = 0;
+                return true;
             }
+            return false;
 
 
-            return obsticleRec.IntersectsWith(playerRec);
         }
+        
 
 
 

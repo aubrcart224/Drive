@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="endScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="endScreen.Designer.cs">
+      <DependentUpon>endScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="endScreen.resx">
+      <DependentUpon>endScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="HighScore.xml" />
+    <None Include="Resources\trafficLight.1.jpg" />
     <None Include="Resources\menuScreenDrive.1.jfif" />
     <None Include="Resources\imageedit_2_3511357856.png" />
     <None Include="Resources\imageedit_0_3790772079.png" />

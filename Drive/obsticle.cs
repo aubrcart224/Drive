@@ -10,17 +10,17 @@ namespace Drive
     internal class obsticle
     {
         public int x, y, width, height, speed;
-        public Color colour;
+        internal string obsticle1;
 
-        public obsticle(int _x, int _y, int _width, int _height, int _speed, Color _colour)
+        public obsticle(int _x, int _y, int _width, int _height, int _speed)
         {
             x = _x;
             y = _y;
             width = _width;
             height = _height;
             speed = _speed;
-            //image = _image;
-            colour = _colour;
+            
+            
 
 
         }
